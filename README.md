@@ -9,3 +9,7 @@
 4. Open examples/ folder in MATLAB and run builder.m (ignore the warnings)
 5. Run start.m
 6. Open factory.slx and click on run
+
+Acknowledgements:
+
+Models from MuJoCo Menagerie were used in this work. Refer to https://github.com/deepmind/mujoco_menagerie for more information.
