@@ -1,0 +1,25 @@
+<mujoco model="ur5e scene">
+<!-- ENGINE SETUP -->
+
+    <!-- MODEL TREE STARTS HERE -->
+  <worldbody>
+
+    <!-- bunch of circularItems -->
+    <body pos="0 -1.5 $0$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $1$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $2$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $3$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $4$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $5$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $6$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $7$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $8$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $9$" childclass="circularItems"> <geom/><joint/> </body>
+    <body pos="0 -1.5 $10$" childclass="circularItems"> <geom/><joint/> </body>
+
+    <!-- solo dappa -->
+    <!-- <body pos="0 1.75 0.55" childclass="circularItems"> <geom/><joint/> </body> -->
+
+  </worldbody>
+
+</mujoco>

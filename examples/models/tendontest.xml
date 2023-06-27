@@ -1,0 +1,58 @@
+<mujoco model="ur5e scene">
+<!-- ENGINE SETUP -->
+  <compiler angle="radian" meshdir="universal_robots_ur5e/assets" autolimits="true"/>
+  <option timestep="0.001" integrator="Euler" >
+    <flag multiccd="enable"/>
+  </option>
+  <statistic center="0.3 0 0.4" extent="3"/>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3"
+      markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+
+    <texture type="2d" name="conveyor" builtin="gradient" mark="edge" rgb1="0.5 0.1 0.1" rgb2="0.8 0.1 0.1"
+      markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="conveyor" texture="conveyor" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+  </asset>
+
+  <!-- MODEL TREE STARTS HERE -->
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane" condim="3"/>
+
+    <geom name="b0" type="cylinder" pos="0 0 1" size="0.2 0.5 0" euler="1.5708 0 0"/>
+    <geom name="b1" type="cylinder" pos="1 0 1" size="0.2 0.5 0" euler="1.5708 0 0"/>
+
+    <site name="s0" pos="-0.5 0 0"/>
+    <site name="s1" pos="0 0 1.5"/>
+    <site name="s2" pos="1 0 1.5"/>
+    
+
+    <body pos="1.5 0 2">
+        <geom type="box" mass="0.01" size="0.05 0.05 0.05" euler="0 0 0"/>
+        <site name="s3"/>
+        <freejoint/>
+    </body>
+
+    <body pos="0 0 2">
+        <geom type="box" mass="0.01" size="0.05 0.05 0.05" euler="0 0 0"/>
+        <site name="bla"/>
+        <freejoint/>
+    </body>
+  </worldbody>
+
+
+<tendon>
+    <spatial range="0.5 6" stiffness="-0.5">
+      <site site="s0"/>
+      <geom geom="b0"/>
+      <site site="bla"/>
+      <geom geom="b1"/>
+      <site site="s3"/>
+
+    </spatial>
+  </tendon>
+
+</mujoco>

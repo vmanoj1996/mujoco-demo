@@ -1,0 +1,14 @@
+<mujoco model="ur5e scene">
+
+  <include file="conveyor3.xml"/>
+
+  <worldbody>
+    <!-- <light pos="0 0 1.5" dir="-1 0 0" directional="true" />
+    <light pos="0 0 1.5" dir="1 0 0" directional="true" />
+    <light pos="0 0 1.5" dir="0 1 0" directional="true" />
+    <light pos="0 0 1.5" dir="0 -1 0" directional="true" /> -->
+    <body pos="0.2 0.4 0.55" childclass="circularItems"> <geom/><joint/> </body>
+
+  </worldbody>
+
+</mujoco>

@@ -1,0 +1,11 @@
+<mujoco model="Packing Box">
+
+  <worldbody>
+
+    <body pos="-0.5 1.3 0">
+      <geom type="box" pos="0 0 0.3" size="0.2 0.7 0.3" mass="0.01" rgba="0.55 0.55 0.55 1" />
+    </body>
+ 
+  </worldbody>
+
+</mujoco>

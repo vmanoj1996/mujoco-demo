@@ -1,0 +1,112 @@
+<mujoco model="ur5e scene">
+  <!-- ENGINE SETUP -->
+  <compiler angle="radian" meshdir="universal_robots_ur5e/assets" autolimits="true" />
+  <option timestep="0.001" integrator="Euler">
+    <flag multiccd="enable" />
+  </option>
+  <statistic center="0.3 0 0.4" extent="3" />
+
+  <!-- Defaults -->
+  <default class="main">
+    <default class="circularItems">
+      <geom type="cylinder" size="0.035 0.02 0" mass="0.1" solref="0.006 1" condim="1"
+        material="tin_material" />
+      <joint type="free" />
+    </default>
+  </default>
+
+  <!-- Actuators -->
+  <actuator>
+    <velocity name="slide_y" joint="slide_y" ctrlrange="0.25 0.50" kv="1000" />
+  </actuator>
+
+  <!-- Sensor -->
+  <sensor>
+    <framepos name="can1_pos" objtype="body" objname="can1" />
+    <rangefinder name="camera_range" site="range_site" cutoff="2" />
+  </sensor>
+  <!-- Lighting -->
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.1 0.1 0.1" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="120" elevation="-20" offwidth="640" offheight="480" />
+  </visual>
+
+  <!-- Assets -->
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512"
+      height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4"
+      rgb2="0.1 0.2 0.3"
+      markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+      reflectance="0.2" />
+
+    <texture type="2d" name="conveyor" builtin="gradient" mark="edge" rgb1="0.5 0.1 0.1"
+      rgb2="0.8 0.1 0.1"
+      markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="conveyor" texture="conveyor" texuniform="true" texrepeat="1 1"
+      reflectance="0.2" />
+
+    <material name="conveyor_simple_material" rgba="0 0.34 0.15 1" shininess="0.9"
+      reflectance="0.5" />
+    <!-- <texture name="conveyor_simple_texture" type="2d" file="conveyor.png"/> -->
+
+    <material name="tin_material" rgba="0.75 0.75 0.75 1" reflectance="0.5" texuniform="false"
+      texture="tin_texture" />
+    <!-- Check the doc for conventions. It is not obvious -->
+    <texture name="tin_texture" type="cube" filefront="tunafront.png" fileback="tunafront.png"
+      filedown="tunadown.png" fileup="tunaup.png" fileleft="tunaleft.png"
+      fileright="tunaright.png" />
+  </asset>
+
+  <!-- MODEL TREE STARTS HERE -->
+  <worldbody>
+    <light pos="0 0 1.5" dir="0.4 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane" condim="4" />
+
+    <!-- Camera model -->
+    <body pos="0 0 1.3" euler="0 0 1.5708">
+      <geom size="0.06 0.03 0.01" type="box" />
+      <site name="range_site" size="0.005 0.005 0.005" type="box" euler="3.14159 0 0" />
+      <camera name="rgbcam" mode="fixed" fovy="48.8" />
+    </body>
+
+    <!-- Conveyor -->
+    <body pos="0 0 0.5">
+      <!-- Conveyor bottom -->
+      <geom type="box" pos="0 0 -0.3" size="0.25 2 0.25" rgba="0.55 0.55 0.55 1" />
+
+      <body>
+        <!-- Conveyor top surface -->
+        <geom name="conveyor_geom" pos="0 -10 -0.01" size="0.25 15 0.02" type="box"
+          material="conveyor_simple_material" condim="4" solref="0.006 1" />
+        <joint name="slide_y" type="slide" axis="0 1 0" />
+      </body>
+
+    </body>
+
+    <body pos="-0.16 -1.5 0.55" name="can1" childclass="circularItems">
+      <geom />
+      <joint />
+    </body>
+    <!-- <body pos="-0.08 -4.5 0.55" childclass="circularItems">
+      <geom />
+      <joint />
+    </body>
+    <body pos="0 -7.5 0.55" childclass="circularItems">
+      <geom />
+      <joint />
+    </body>
+    <body pos="0.08 -10.5 0.55" childclass="circularItems">
+      <geom />
+      <joint />
+    </body>
+    <body pos="0.16 -13.5 0.55" childclass="circularItems">
+      <geom />
+      <joint />
+    </body> -->
+
+  </worldbody>
+
+</mujoco>

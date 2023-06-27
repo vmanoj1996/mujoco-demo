@@ -1,0 +1,26 @@
+<mujoco model="Packing Box">
+  <default class="main">
+    <default class="box_side">
+      <geom type="box" mass="0.01" rgba="0.66 0.55 0.40 1" condim="4"/>
+    </default>
+  </default>
+
+  <worldbody>
+
+    <body pos="-0.5 0.7 0.601" childclass="box_side">
+      <!-- bottom -->
+      <geom pos="0 0 0" size="0.111 0.075 0.001" />
+      <!-- long side -->
+      <geom pos="0 0 0.01" euler="1.5707 0 0" size="0.111 0.01 0.001" />
+      <geom pos="0 0.075 0.01" euler="1.5707 0 0" size="0.111 0.01 0.001" />
+      <geom pos="0 -0.075 0.01" euler="1.5707 0 0" size="0.111 0.01 0.001" />
+
+      <!-- short side -->
+      <geom pos="-0.111 0 0.01" euler="1.5707 1.5707 0" size="0.075 0.01 0.001" />
+      <geom pos="0.111 0 0.01" euler="1.5707 1.5707 0" size="0.075 0.01 0.001" />
+      <!-- <freejoint/> -->
+    </body>
+
+  </worldbody>
+
+</mujoco>

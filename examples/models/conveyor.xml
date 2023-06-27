@@ -1,0 +1,102 @@
+<mujoco model="ur5e scene">
+<!-- ENGINE SETUP -->
+  <compiler angle="radian" meshdir="universal_robots_ur5e/assets" autolimits="true"/>
+  <option timestep="0.0001" integrator="Euler" >
+    <flag multiccd="enable"/>
+  </option>
+  <statistic center="0.3 0 0.4" extent="3"/>
+
+  <include file="objects.xml"/>
+
+<!-- Defaults -->
+  <default class="main">
+    <default class="small_enc">
+      <geom size="0.01 0.01 0.56" type="box" rgba="0 0 0.3 0.3" condim="3" friction="0.05 0.005 0.0001" solref="0.006 1"/>
+    </default>
+    <default class="large_enc">
+      <geom size="0.01 0.04 0.53" type="box" rgba="0 0 0.3 0.3" condim="3" friction="0.05 0.005 0.0001" solref="0.006 1"/>
+    </default>
+
+    <default class="circularItems">
+      <geom type="cylinder" size="0.035 0.02 0" rgba="0 0.5 0 1" mass="0.1" solref="0.006 1"  condim="1"/>
+      <joint type="free"/>
+    </default>
+
+  </default>
+
+<!-- Actuators -->
+  <actuator>
+    <position name="pusher" joint="pusher_joint" ctrlrange="0.01 0.1" kp="1000"/>
+    <position name="slide_x" joint="slide_x" ctrlrange="-0.25 0.25" kp="1000"/>
+  </actuator> 
+<!-- Lighting -->
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.1 0.1 0.1" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="120" elevation="-20" offwidth="640" offheight="480"/>
+  </visual>
+
+<!-- Assets -->
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3"
+      markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+
+    <texture type="2d" name="conveyor" builtin="gradient" mark="edge" rgb1="0.5 0.1 0.1" rgb2="0.8 0.1 0.1"
+      markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="conveyor" texture="conveyor" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+  </asset>
+
+    <!-- MODEL TREE STARTS HERE -->
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane" condim="3"/>
+
+    <!-- Camera model -->
+    <body pos="0 0 1" euler="0 0 1.5708">
+      <geom size="0.06 0.03 0.01" type="box"/>
+      <camera name="rgbcam" mode="fixed" fovy="48.8"/>
+    </body>
+
+    <!-- Conveyor -->
+    <body pos="0 0 0.2">
+      <!-- Conveyor top surface -->
+      <geom name="conveyor_geom" pos="0 0 -0.04" size="0.25 2 0.05" type="box" material="conveyor" condim="1" solref="0.006 1"/>
+      <geom name="conveyor_friction_strip" pos="0 -1.5 0" size="0.25 0.035 0.015" type="box" rgba="0.1 0.1 0.1 1" friction="0.6 0.005 0.0001" condim="3" solref="0.006 1"/>
+      
+      <body>
+        <!-- Mobile platform -->
+        <body>
+          <!-- pusher plate -->
+          <geom size="0.03 0.15 0.01" pos="0 -1.7 0.033" type="box" condim="1" solref="0.006 1"/>
+          <joint name="pusher_joint" type="slide" axis="0 1 0" damping="50"/>
+        </body>
+       
+        <body childclass="small_enc">
+          <!-- Enclosure for circularItems -->
+          <geom pos="0 -1.545 0.605"/>
+          <geom pos="0 -1.454 0.62"/>
+        </body>
+
+        <body childclass="large_enc">
+          <!-- Enclosure for circularItems -->
+          <geom pos="0.04525 -1.5 0.55"/>
+          <geom pos="-0.04525 -1.5 0.55"/>
+
+          <!-- Guide  -->
+          <geom pos="0.04525 -1.42 0.045" size="0.01 0.04 0.025"  condim="1"/>
+          <geom pos="-0.04525 -1.42 0.045" size="0.01 0.04 0.025"  condim="1"/>
+
+        </body>
+
+        
+        <!-- platform slider -->
+        <joint name="slide_x" type="slide" axis="1 0 0" damping="100"/>
+      </body>
+
+    </body>
+
+  </worldbody>
+
+</mujoco>

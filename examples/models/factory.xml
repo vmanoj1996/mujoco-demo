@@ -1,0 +1,12 @@
+<mujoco model="ur5e scene">
+  <statistic center="0.3 0 0.4" extent="3"/>
+  
+
+  <include file="conveyor4.xml"/>
+  <include file="ur5e_suction.xml"/>
+  <!-- <include file="packing_box.xml"/> -->
+  <include file="table.xml"/>
+
+
+
+</mujoco>
