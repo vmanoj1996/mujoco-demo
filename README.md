@@ -1,5 +1,10 @@
 # mujoco-demo
 
+[![Demo Video](https://www.youtube.com/watch?v=wVSQ-lmArJY)](https://www.youtube.com/watch?v=wVSQ-lmArJY)
+
+## Instructions
+
+
 1. Download and setup [mujoco-simulink-blockset](https://github.com/mathworks-robotics/mujoco-simulink-blockset)
 2. Install a supported C/C++ compiler and run,
 
@@ -10,6 +15,6 @@
 5. Run start.m
 6. Open factory.slx and click on run
 
-Acknowledgements:
+## Acknowledgements:
 
 Models from MuJoCo Menagerie were used in this work. Refer to https://github.com/deepmind/mujoco_menagerie for more information.
