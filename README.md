@@ -1,6 +1,6 @@
 # mujoco-demo
 
-[![Demo Video](https://www.youtube.com/watch?v=wVSQ-lmArJY)](https://www.youtube.com/watch?v=wVSQ-lmArJY)
+[![Demo Video](http://img.youtube.com/vi/wVSQ-lmArJY/0.jpg)](http://www.youtube.com/watch?v=wVSQ-lmArJY)
 
 ## Instructions
 
