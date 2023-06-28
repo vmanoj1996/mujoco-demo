@@ -1,7 +1,8 @@
 %% Path Setup
 addpath('./detector');
 addpath('./models');
-addpath('./detector/acfDetectorWithBackground/')
+% addpath('./detector/acfDetectorWithBackground/')
+addpath('./detector/detectorWithoutBackground')
 
 %% Robot and perception
 robotsetup;
