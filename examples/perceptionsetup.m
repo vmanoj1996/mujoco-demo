@@ -1,5 +1,4 @@
 %% Setup perception
-%load detector.mat
 dt_kf = 0.040;
 dt_predictor = 0.010;
 % dt_img = 0.050;
@@ -15,3 +14,6 @@ P0 = 10*diag([1 1 1 1]);
 Q = dt_kf^2*diag([xDot_err_var, xDot_err_var, vxDot_err_var, vxDot_err_var]);
 Qbad = dt_kf^2*diag([1 1 1 1]);
 R = 2.5e-5*diag([1 1]);
+
+%% detector
+load background.mat
