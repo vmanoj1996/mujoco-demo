@@ -1,5 +1,5 @@
 %% Setup perception
-load detector.mat
+%load detector.mat
 dt_kf = 0.040;
 dt_predictor = 0.010;
 % dt_img = 0.050;

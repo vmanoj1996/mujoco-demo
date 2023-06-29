@@ -1,3 +1,4 @@
+% messes up the order for some reason
 background = rgb2gray(imread('background.png'));
 
 fileList = {};
@@ -10,5 +11,8 @@ for index = 51:100
     fileList{end+1} = strWrite;
 end
 
-trainingdata = [fileList', gTruth.LabelData(1:end-1, :)];
-save trainingData.mat trainingdata
+load gtruth_table.mat
+
+trainingdata = [fileList', gtruth_table];
+save trainingData1.mat trainingdata
+
